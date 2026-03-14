@@ -14,14 +14,14 @@
 // Architectural notes:
 // - Game connects EventBus events (leaf:collected, player:damaged, etc.) to SoundManager.play().
 // - This keeps audio concerns isolated from gameplay and supports easy swapping/muting.
-
+import {loadSoundAsync} from "./AssetLoader.js";
 export class SoundManager {
   constructor() {
     this.sfx = {};
   }
 
-  load(name, path) {
-    this.sfx[name] = loadSound(path);
+  async load(name, path) {
+    this.sfx[name] = await loadSoundAsync(path);
   }
 
   play(name) {

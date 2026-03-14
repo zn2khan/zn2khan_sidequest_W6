@@ -171,6 +171,24 @@ function loadImageAsync(path) {
   });
 }
 
+export function loadSoundAsync(path) {
+  if (!path) {
+    // This is the exact scenario that led to GET /undefined.
+    throw new Error(`[AssetLoader] loadSoundAsync called with invalid path: ${path}`);
+  }
+  return new Promise((resolve, reject) => {
+    try {
+      loadSound(
+        path,
+        (sound) => resolve(sound),
+        (err) => reject(new Error(`[AssetLoader] Failed to load sound "${path}": ${err}`)),
+      );
+    } catch (e) {
+      reject(new Error(`[AssetLoader] loadSound("${path}") threw: ${e?.message ?? e}`));
+    }
+  });
+}
+
 async function loadBackgrounds(levelPkg) {
   // If levels.json supplies parallaxLayers with keys and sources, load them dynamically.
   // Expected shape (flexible):

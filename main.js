@@ -37,7 +37,10 @@ import { LevelLoader } from "./src/LevelLoader.js";
 import { Game } from "./src/Game.js";
 import { ParallaxBackground } from "./src/ParallaxBackground.js";
 import { loadAssets } from "./src/AssetLoader.js";
-import { applyIntegerScale, installResizeHandler } from "./src/utils/IntegerScale.js";
+import {
+  applyIntegerScale,
+  installResizeHandler,
+} from "./src/utils/IntegerScale.js";
 
 import { CameraController } from "./src/CameraController.js";
 import { InputManager } from "./src/InputManager.js";
@@ -129,6 +132,13 @@ async function boot() {
   // --- Audio registry ---
   // (AudioContext may still be locked until the user clicks/presses a key.)
   soundManager = new SoundManager();
+
+  //Load sounds
+  await soundManager.load("hit", "./assets/sfx/hitEnemy.wav");
+  await soundManager.load("leaf", "./assets/sfx/leafcollect.wav");
+  await soundManager.load("jump", "./assets/sfx/jump.wav");
+  await soundManager.load("music", "./assets/sfx/music.wav");
+  await soundManager.load("hurt", "./assets/sfx/receiveDamage.wav");
 
   // --- Parallax layer defs (VIEW) ---
   const defs = levelPkg.level?.view?.parallax ?? [];
@@ -314,7 +324,7 @@ window.addEventListener(
       e.preventDefault();
     }
   },
-  { passive: false },
+  { passive: false }
 );
 
 // ------------------------------------------------------------
