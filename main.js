@@ -135,7 +135,7 @@ async function boot() {
 
   //Load sounds
   await soundManager.load("hit", "./assets/sfx/hitEnemy.wav");
-  await soundManager.load("leaf", "./assets/sfx/leafcollect.wav");
+  await soundManager.load("leaf", "./assets/sfx/leafCollect.wav");
   await soundManager.load("jump", "./assets/sfx/jump.wav");
   await soundManager.load("music", "./assets/sfx/music.wav");
   await soundManager.load("hurt", "./assets/sfx/receiveDamage.wav");
